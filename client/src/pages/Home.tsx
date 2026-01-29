@@ -4,6 +4,7 @@ import Spreads from "@/components/Spreads";
 import AppPreview from "@/components/AppPreview";
 import Creator from "@/components/Creator";
 import Testimonials from "@/components/Testimonials";
+import Pricing from "@/components/Pricing";
 import Footer from "@/components/Footer";
 
 /**
@@ -29,6 +30,7 @@ export default function Home() {
       <AppPreview />
       <Creator />
       <Testimonials />
+      <Pricing />
       <Footer />
     </div>
   );
