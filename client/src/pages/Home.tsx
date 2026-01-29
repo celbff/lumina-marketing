@@ -1,25 +1,35 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import Hero from "@/components/Hero";
+import Features from "@/components/Features";
+import Spreads from "@/components/Spreads";
+import AppPreview from "@/components/AppPreview";
+import Creator from "@/components/Creator";
+import Testimonials from "@/components/Testimonials";
+import Footer from "@/components/Footer";
 
 /**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
+ * Landing Page - Lumina
+ * Tema: Escuro, Minimalista, Místico & Futurista
+ * 
+ * Seções:
+ * 1. Hero - Apresentação principal com CTA
+ * 2. Features - 3 diferenciais principais
+ * 3. Spreads - Tiragens disponíveis
+ * 4. AppPreview - Carrossel de telas do app
+ * 5. Creator - Sobre Celso Luiz
+ * 6. Testimonials - Depoimentos de usuários
+ * 7. Footer - Links e CTA final
  */
-export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
 
+export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
+    <div className="min-h-screen bg-background text-foreground">
+      <Hero />
+      <Features />
+      <Spreads />
+      <AppPreview />
+      <Creator />
+      <Testimonials />
+      <Footer />
     </div>
   );
 }
