@@ -15,9 +15,12 @@ export default function Pricing() {
   };
 
   const handleWhatsApp = () => {
-    const message = `Olá! Gostaria de adquirir acesso ao Lumina por R$ ${price.toFixed(2)}. Já realizei o pagamento via PIX.`;
+    const message = `Olá! Realizei o pagamento via PIX e gostaria de ativar minha conta premium no Lumina.`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
+    setTimeout(() => {
+      window.location.href = "/payment-success";
+    }, 1000);
   };
 
   return (
