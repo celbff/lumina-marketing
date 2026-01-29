@@ -93,14 +93,14 @@ export default function Hero() {
           </div>
 
           {/* Lado direito - Imagem */}
-          <div className="hidden lg:flex justify-center items-center">
+          <div className="flex justify-center items-center">
             <div className="relative w-full max-w-md">
               {/* Glow effect */}
               <div className="absolute -inset-4 bg-gradient-to-r from-accent via-secondary to-accent rounded-2xl opacity-20 blur-xl" />
               
               {/* Imagem */}
               <img
-                src="/images/Imagem principal topo.jpeg"
+                src="/images/imagem_principal_topo.jpeg"
                 alt="Lumina - Mentor de Baralho Cigano com IA"
                 className="relative w-full rounded-2xl shadow-2xl object-cover"
               />

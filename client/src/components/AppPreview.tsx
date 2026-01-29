@@ -7,37 +7,37 @@ const screens = [
     id: 1,
     title: "Mesa Real",
     description: "Leitura completa e sistêmica com todas as posições",
-    image: "/images/Tela mesa real.jpeg",
+    image: "/images/tela_mesa_real.jpeg",
   },
   {
     id: 2,
     title: "Estudo & Fundamentos",
     description: "Aprenda os fundamentos do Baralho Cigano",
-    image: "/images/Tela de estudo.jpeg",
+    image: "/images/tela_estudo.jpeg",
   },
   {
     id: 3,
     title: "Glossário",
     description: "Consulte significados e interpretações",
-    image: "/images/tela glossário.jpeg",
+    image: "/images/tela_glossario.jpeg",
   },
   {
     id: 4,
     title: "Tiragem de 9 Cartas",
     description: "Leitura versátil com múltiplas interpretações",
-    image: "/images/Tela tiragem 9 cartas.jpeg",
+    image: "/images/tela_tiragem_9_cartas.jpeg",
   },
   {
     id: 5,
     title: "Tiragem do Relógio",
     description: "Compreenda ciclos temporais e períodos",
-    image: "/images/Tela tiragem relógio.jpeg",
+    image: "/images/tela_tiragem_relogio.jpeg"
   },
   {
     id: 6,
     title: "Tiragem Personalizada",
     description: "Crie suas próprias tiragens customizadas",
-    image: "/images/Tela tiragem personalizada.jpeg",
+    image: "/images/tela_tiragem_personalizada.jpeg",
   },
 ];
 

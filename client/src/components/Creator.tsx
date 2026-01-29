@@ -20,7 +20,7 @@ export default function Creator() {
               {/* Frame */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-accent/30 border border-accent/20">
                 <img
-                  src="/images/terapeuta Celso luiz.jpeg"
+                  src="/images/terapeuta_celso_luiz.jpeg"
                   alt="Celso Luiz - Criador do Lumina"
                   className="w-full h-auto object-cover"
                 />
