@@ -5,6 +5,7 @@ import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
 import { z } from "zod";
 import * as db from "./db";
 import { TRPCError } from "@trpc/server";
+import { storagePut } from "./storage";
 
 export const appRouter = router({
   system: systemRouter,
@@ -55,6 +56,24 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         if (ctx.user?.role !== 'admin') throw new TRPCError({ code: 'FORBIDDEN' });
         return await db.deleteProduct(input.id);
+      }),
+  }),
+
+  storage: router({
+    uploadImage: protectedProcedure
+      .input(z.object({
+        file: z.instanceof(Blob),
+        fileName: z.string(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user?.role !== 'admin') throw new TRPCError({ code: 'FORBIDDEN' });
+        
+        const buffer = await input.file.arrayBuffer();
+        const fileKey = `products/${Date.now()}-${input.fileName}`;
+        const mimeType = input.file.type || 'image/jpeg';
+        
+        const result = await storagePut(fileKey, Buffer.from(buffer), mimeType);
+        return result;
       }),
   }),
 

@@ -28,6 +28,7 @@ export default function AdminShop() {
 
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -36,10 +37,31 @@ export default function AdminShop() {
     category: "",
     stock: "0",
   });
+  const uploadImage = trpc.storage.uploadImage.useMutation();
 
   const handleLogout = () => {
     localStorage.removeItem("admin_token");
     setLocation("/");
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    try {
+      const result = await uploadImage.mutateAsync({
+        file: file,
+        fileName: file.name,
+      });
+      setFormData({ ...formData, imageUrl: result.url });
+      alert("Imagem enviada com sucesso!");
+    } catch (error) {
+      console.error("Erro ao enviar imagem:", error);
+      alert("Erro ao enviar imagem");
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
   if (isLoading) {
@@ -168,14 +190,37 @@ export default function AdminShop() {
                 className="w-full px-4 py-2 bg-slate-800/50 border border-accent/30 rounded-lg text-white placeholder:text-muted-foreground"
                 rows={3}
               />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <input
-                  type="text"
-                  placeholder="URL da Imagem"
-                  value={formData.imageUrl}
-                  onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                  className="px-4 py-2 bg-slate-800/50 border border-accent/30 rounded-lg text-white placeholder:text-muted-foreground"
-                />
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-muted-foreground mb-2">Upload de Imagem</label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      disabled={uploadingImage}
+                      className="w-full px-4 py-2 bg-slate-800/50 border border-accent/30 rounded-lg text-white file:bg-accent file:text-accent-foreground file:border-0 file:rounded file:px-3 file:py-1 file:cursor-pointer"
+                    />
+                    {uploadingImage && <p className="text-sm text-accent mt-1">Enviando...</p>}
+                  </div>
+                  <div>
+                    <label className="block text-sm text-muted-foreground mb-2">URL da Imagem (ou upload acima)</label>
+                    <input
+                      type="text"
+                      placeholder="URL gerada automaticamente"
+                      value={formData.imageUrl}
+                      onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-800/50 border border-accent/30 rounded-lg text-white placeholder:text-muted-foreground"
+                    />
+                  </div>
+                </div>
+                {formData.imageUrl && (
+                  <div className="relative w-full h-32 rounded-lg overflow-hidden border border-accent/30">
+                    <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
                   type="text"
                   placeholder="Categoria"
