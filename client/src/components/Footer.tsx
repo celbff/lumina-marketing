@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Mail, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Mail, Youtube, Globe, MessageCircle } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -83,32 +83,40 @@ export default function Footer() {
             <h4 className="font-semibold text-white">Conecte-se</h4>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="http://www.youtube.com/@psicoterapeutaholisticoAra"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 border border-accent/20 hover:border-accent hover:bg-accent/10 transition"
-                aria-label="Instagram"
+                aria-label="YouTube"
               >
-                <Instagram className="w-5 h-5 text-accent" />
+                <Youtube className="w-5 h-5 text-accent" />
               </a>
               <a
-                href="#"
+                href="https://share.google/0wIM9p9cZRgITT7dZ"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 border border-accent/20 hover:border-accent hover:bg-accent/10 transition"
-                aria-label="Facebook"
+                aria-label="Google Business"
               >
-                <Facebook className="w-5 h-5 text-accent" />
+                <Globe className="w-5 h-5 text-accent" />
               </a>
               <a
-                href="#"
+                href="https://wa.me/5516997934558"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 border border-accent/20 hover:border-accent hover:bg-accent/10 transition"
-                aria-label="LinkedIn"
+                aria-label="WhatsApp"
               >
-                <Linkedin className="w-5 h-5 text-accent" />
+                <MessageCircle className="w-5 h-5 text-accent" />
               </a>
               <a
-                href="mailto:contato@lumina.com"
+                href="https://lunara-terapias-site.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 border border-accent/20 hover:border-accent hover:bg-accent/10 transition"
-                aria-label="Email"
+                aria-label="Site"
               >
-                <Mail className="w-5 h-5 text-accent" />
+                <Globe className="w-5 h-5 text-accent" />
               </a>
             </div>
           </div>
