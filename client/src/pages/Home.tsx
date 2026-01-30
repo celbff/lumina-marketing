@@ -19,7 +19,8 @@ import Footer from "@/components/Footer";
  * 4. AppPreview - Carrossel de telas do app
  * 5. Creator - Sobre Celso Luiz
  * 6. Testimonials - Depoimentos de usuários
- * 7. Footer - Links e CTA final
+ * 7. Pricing - Seção de pagamento
+ * 8. Footer - Links e CTA final
  */
 
 export default function Home() {

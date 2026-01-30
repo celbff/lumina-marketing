@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { useEffect, useRef, useState } from "react";
 
 const spreads = [
   {
@@ -28,8 +29,36 @@ const spreads = [
 ];
 
 export default function Spreads() {
+  const [activeId, setActiveId] = useState<number | null>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = cardsRef.current.indexOf(entry.target as HTMLDivElement);
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            const spreadId = spreads[index]?.id;
+            if (spreadId) setActiveId(spreadId);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => {
+      cardsRef.current.forEach((card) => {
+        if (card) observer.unobserve(card);
+      });
+    };
+  }, []);
+
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section id="spreads" className="relative py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-950 via-slate-900 to-blue-950 -z-10" />
       
@@ -50,31 +79,54 @@ export default function Spreads() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {spreads.map((spread) => (
-            <div
-              key={spread.id}
-              className="group relative p-6 rounded-lg bg-gradient-to-br from-white/5 to-white/[0.02] border border-accent/20 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10 cursor-pointer"
-            >
-              {/* Hover glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-secondary/0 group-hover:from-accent/10 group-hover:to-secondary/10 rounded-lg transition-all duration-300 -z-10" />
+          {spreads.map((spread, index) => {
+            const isActive = activeId === spread.id;
+            
+            return (
+              <div
+                key={spread.id}
+                ref={(el) => {
+                  cardsRef.current[index] = el;
+                }}
+                className={`group relative p-6 rounded-lg transition-all duration-500 cursor-pointer ${
+                  isActive
+                    ? "bg-gradient-to-br from-accent/20 to-secondary/10 border-accent/60 shadow-lg shadow-accent/20"
+                    : "bg-gradient-to-br from-white/5 to-white/[0.02] border-accent/20 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+                } border`}
+              >
+                {/* Hover glow */}
+                <div className={`absolute inset-0 rounded-lg transition-all duration-500 -z-10 ${
+                  isActive
+                    ? "bg-gradient-to-br from-accent/20 to-secondary/10"
+                    : "bg-gradient-to-br from-accent/0 to-secondary/0 group-hover:from-accent/10 group-hover:to-secondary/10"
+                }`} />
 
-              {/* Icon */}
-              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                {spread.icon}
+                {/* Icon */}
+                <div className={`text-4xl mb-4 transition-all duration-300 ${
+                  isActive ? "scale-125" : "group-hover:scale-110"
+                }`}>
+                  {spread.icon}
+                </div>
+
+                {/* Content */}
+                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
+                  isActive ? "text-white" : "text-white group-hover:text-accent"
+                }`}>
+                  {spread.name}
+                </h3>
+                <p className={`text-sm leading-relaxed transition-colors duration-300 ${
+                  isActive ? "text-white/80" : "text-muted-foreground"
+                }`}>
+                  {spread.description}
+                </p>
+
+                {/* Decorative accent */}
+                <div className={`absolute top-0 right-0 bg-gradient-to-b from-accent to-secondary rounded-r-lg transition-all duration-300 ${
+                  isActive ? "w-1 h-full" : "w-1 h-0 group-hover:h-full"
+                }`} />
               </div>
-
-              {/* Content */}
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-accent transition-colors">
-                {spread.name}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {spread.description}
-              </p>
-
-              {/* Decorative accent */}
-              <div className="absolute top-0 right-0 w-1 h-0 bg-gradient-to-b from-accent to-secondary group-hover:h-full transition-all duration-300 rounded-r-lg" />
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Coming soon notice */}

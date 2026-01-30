@@ -1,18 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-
 export default function Hero() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubmitted(true);
-      setEmail("");
-      setTimeout(() => setSubmitted(false), 3000);
-    }
-  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -52,29 +38,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Formulário de inscrição */}
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 pt-4">
-              <input
-                type="email"
-                placeholder="Seu email para acesso antecipado"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-accent/30 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
-                required
-              />
-              <Button
-                type="submit"
-                className="px-6 py-3 bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg font-semibold transition"
-              >
-                Inscrever-se
-              </Button>
-            </form>
 
-            {submitted && (
-              <p className="text-sm text-accent animate-pulse">
-                ✓ Obrigado! Verifique seu email para instruções.
-              </p>
-            )}
 
             {/* Link para degustação */}
             <div className="pt-4">

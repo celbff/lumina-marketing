@@ -6,7 +6,7 @@ const testimonials = [
   {
     id: 1,
     name: "Marina Silva",
-    role: "Consultora de Vida",
+    role: "Terapeuta Oracular",
     content:
       "Lumina transformou minha prática. As interpretações são precisas e profundas, combinando exatamente a sabedoria ancestral com a tecnologia moderna. Meus clientes ficam impressionados com a qualidade.",
     rating: 5,
@@ -43,7 +43,7 @@ export default function Testimonials() {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section id="testimonials" className="relative py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-blue-950 to-slate-900 -z-10" />
       

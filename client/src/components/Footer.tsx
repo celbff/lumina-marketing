@@ -43,6 +43,11 @@ export default function Footer() {
                   Depoimentos
                 </a>
               </li>
+              <li>
+                <a href="/shop" className="text-muted-foreground hover:text-accent transition">
+                  Loja
+                </a>
+              </li>
             </ul>
           </div>
 

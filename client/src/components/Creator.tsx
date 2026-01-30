@@ -2,7 +2,7 @@ import { Star } from "lucide-react";
 
 export default function Creator() {
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section id="creator" className="relative py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-950 via-slate-900 to-blue-950 -z-10" />
       
@@ -11,18 +11,18 @@ export default function Creator() {
 
       <div className="container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Imagem */}
+          {/* Imagem Circular */}
           <div className="flex justify-center">
-            <div className="relative w-full max-w-sm">
+            <div className="relative w-full max-w-sm flex justify-center">
               {/* Glow effect */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-accent via-secondary to-accent rounded-2xl opacity-20 blur-xl" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-accent via-secondary to-accent rounded-full opacity-20 blur-xl" />
               
-              {/* Frame */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-accent/30 border border-accent/20">
+              {/* Circular Frame */}
+              <div className="relative w-80 h-80 rounded-full overflow-hidden shadow-2xl shadow-accent/30 border-4 border-accent/20 flex-shrink-0">
                 <img
-                  src="/images/terapeuta_celso_luiz.jpeg"
+                  src="/images/celso_luiz.png"
                   alt="Celso Luiz - Criador do Lumina"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
 
@@ -45,7 +45,7 @@ export default function Creator() {
               </h2>
               
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Terapeuta especializado em Baralho Cigano com mais de duas décadas de experiência em leituras oraculares, desenvolvimento espiritual e orientação transformadora.
+                Formado como Psicoterapeuta Holístico, possui experiência de vários anos e milhares de atendimentos nas abordagens de terapias complementares e leituras oraculares, também especializado em design digital e venda de cartas de oráculos e baralhos com ou sem legendas*. Com alto desenvolvimento espiritual e orientação transformadora.
               </p>
             </div>
 
@@ -54,7 +54,7 @@ export default function Creator() {
               <h3 className="text-xl font-semibold text-white">Especialidades</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  "Leituras Profundas",
+                  "Leituras Intuitivas",
                   "Interpretação Sistêmica",
                   "Orientação Espiritual",
                   "Desenvolvimento Pessoal",

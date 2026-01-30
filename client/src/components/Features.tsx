@@ -1,4 +1,5 @@
 import { Sparkles, Brain, Clock } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const features = [
   {
@@ -19,8 +20,35 @@ const features = [
 ];
 
 export default function Features() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = cardsRef.current.indexOf(entry.target as HTMLDivElement);
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            setActiveIndex(index);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => {
+      cardsRef.current.forEach((card) => {
+        if (card) observer.unobserve(card);
+      });
+    };
+  }, []);
+
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section id="features" className="relative py-20 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-blue-950 to-slate-900 -z-10" />
       
@@ -41,29 +69,54 @@ export default function Features() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => {
             const Icon = feature.icon;
+            const isActive = activeIndex === index;
+            
             return (
               <div
                 key={index}
-                className="group relative p-8 rounded-xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-accent/20 hover:border-accent/50 transition-all duration-300 hover:shadow-xl hover:shadow-accent/10"
+                ref={(el) => {
+                  cardsRef.current[index] = el;
+                }}
+                className={`group relative p-8 rounded-xl transition-all duration-500 ${
+                  isActive
+                    ? "bg-gradient-to-br from-accent/20 to-secondary/10 border-accent/60 shadow-xl shadow-accent/20"
+                    : "bg-gradient-to-br from-white/5 to-white/[0.02] border-accent/20"
+                } border hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10`}
               >
-                {/* Glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-secondary/0 group-hover:from-accent/10 group-hover:to-secondary/10 rounded-xl transition-all duration-300 -z-10" />
+                {/* Glow on active/hover */}
+                <div className={`absolute inset-0 rounded-xl transition-all duration-500 -z-10 ${
+                  isActive
+                    ? "bg-gradient-to-br from-accent/20 to-secondary/10"
+                    : "bg-gradient-to-br from-accent/0 to-secondary/0 group-hover:from-accent/10 group-hover:to-secondary/10"
+                }`} />
 
                 {/* Icon */}
-                <div className="mb-6 inline-block p-3 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors">
-                  <Icon className="w-6 h-6 text-accent" />
+                <div className={`mb-6 inline-block p-3 rounded-lg transition-all duration-300 ${
+                  isActive
+                    ? "bg-accent/40"
+                    : "bg-accent/10 group-hover:bg-accent/20"
+                }`}>
+                  <Icon className={`w-6 h-6 transition-colors duration-300 ${
+                    isActive ? "text-white" : "text-accent"
+                  }`} />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-accent transition-colors">
+                <h3 className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
+                  isActive ? "text-white" : "text-white group-hover:text-accent"
+                }`}>
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className={`leading-relaxed transition-colors duration-300 ${
+                  isActive ? "text-white/80" : "text-muted-foreground"
+                }`}>
                   {feature.description}
                 </p>
 
                 {/* Decorative line */}
-                <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-accent to-secondary group-hover:w-full transition-all duration-300 rounded-b-xl" />
+                <div className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r from-accent to-secondary rounded-b-xl transition-all duration-300 ${
+                  isActive ? "w-full" : "w-0 group-hover:w-full"
+                }`} />
               </div>
             );
           })}
