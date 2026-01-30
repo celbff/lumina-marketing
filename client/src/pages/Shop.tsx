@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ShoppingCart, Trash2, MessageCircle } from "lucide-react";
+import { ShoppingCart, Trash2, MessageCircle, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
 
 interface CartItem {
@@ -91,9 +91,14 @@ export default function Shop() {
       <div className="container py-20">
         {/* Header */}
         <div className="flex justify-between items-center mb-12">
-          <h1 className="text-5xl font-bold text-white" style={{ fontFamily: "Playfair Display" }}>
-            Loja <span className="text-accent">Lumina</span>
-          </h1>
+          <div className="flex items-center gap-4">
+            <a href="/" className="p-2 hover:bg-white/10 rounded-lg transition">
+              <ArrowLeft className="w-6 h-6 text-accent" />
+            </a>
+            <h1 className="text-5xl font-bold text-white" style={{ fontFamily: "Playfair Display" }}>
+              Loja <span className="text-accent">Lumina</span>
+            </h1>
+          </div>
           <button
             onClick={() => setShowCart(!showCart)}
             className="relative p-3 bg-accent/20 rounded-lg hover:bg-accent/30 transition"

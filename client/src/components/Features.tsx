@@ -48,7 +48,7 @@ export default function Features() {
   }, []);
 
   return (
-    <section id="features" className="relative py-20 overflow-hidden">
+    <section id="features" className="relative py-8 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-blue-950 to-slate-900 -z-10" />
       

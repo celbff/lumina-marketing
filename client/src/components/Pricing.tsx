@@ -24,7 +24,7 @@ export default function Pricing() {
   };
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section id="pricing" className="relative py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-950 via-slate-900 to-blue-950 -z-10" />
       
