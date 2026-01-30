@@ -55,7 +55,7 @@ export default function AppPreview() {
   const currentScreen = screens[currentIndex];
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section id="preview" className="relative py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-blue-950 to-slate-900 -z-10" />
       

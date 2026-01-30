@@ -10,6 +10,7 @@ export default function Header() {
     { label: "Interface", href: "#preview" },
     { label: "Depoimentos", href: "#testimonials" },
     { label: "Preços", href: "#pricing" },
+    { label: "Loja", href: "/shop" },
   ];
 
   return (

@@ -135,6 +135,14 @@ export default function Spreads() {
             <span className="text-accent font-semibold">Em breve:</span> Mais atualizações e métodos de tiragem serão adicionados ao Lumina
           </p>
         </div>
+
+        {/* CTA para loja */}
+        <div className="mt-12 text-center">
+          <p className="text-muted-foreground mb-4">Interessado em adquirir baralhos ciganos e oráculos?</p>
+          <a href="/shop" className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent/90 text-accent-foreground rounded-lg font-semibold transition">
+            Conheça Nossa Loja
+          </a>
+        </div>
       </div>
     </section>
   );
