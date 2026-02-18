@@ -20,7 +20,7 @@ export default function Creator() {
               {/* Circular Frame */}
               <div className="relative w-80 h-80 rounded-full overflow-hidden shadow-2xl shadow-accent/30 border-4 border-accent/20 flex-shrink-0">
                 <img
-                  src="/images/celso_luiz.png"
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663309535032/nmNaUlDfyHCjbjHy.png"
                   alt="Celso Luiz - Criador do Lumina"
                   className="w-full h-full object-cover"
                 />

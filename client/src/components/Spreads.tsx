@@ -26,6 +26,12 @@ const spreads = [
     description: "Especializada em questões de amor, relacionamentos e conexões profundas.",
     icon: "💕",
   },
+  {
+    id: 5,
+    name: "Pirâmide 6 Cartas",
+    description: "Uma estrutura piramidal que revela camadas progressivas de insight e clareza sobre situações complexas.",
+    icon: "🔺",
+  },
 ];
 
 export default function Spreads() {
@@ -76,9 +82,10 @@ export default function Spreads() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Escolha o método que melhor se adequa à sua pergunta e necessidade
           </p>
+          <p className="text-sm text-accent font-semibold mt-2">✨ Novo: Pirâmide 6 Cartas</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {spreads.map((spread, index) => {
             const isActive = activeId === spread.id;
             
