@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { Check } from "lucide-react";
+import { Check, Copy, MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 const plans = [
@@ -58,6 +58,15 @@ const plans = [
 
 export default function Plans() {
   const [selectedPlan, setSelectedPlan] = useState<number>(2);
+  const [copied, setCopied] = useState(false);
+  const pixKey = "lunara_terapias@jim.com";
+  const whatsappNumber = "5516997934558";
+
+  const handleCopyPix = () => {
+    navigator.clipboard.writeText(pixKey);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <section id="plans" className="relative py-20 overflow-hidden">
@@ -136,7 +145,9 @@ export default function Plans() {
                           <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 transition-colors duration-300 ${
                             isSelected ? "text-accent" : "text-accent/60"
                           }`} />
-                          <span className="text-sm text-white/80">{feature}</span>
+                          <span className={`text-sm transition-colors duration-300 ${
+                            isSelected && plan.id === 2 ? "text-white font-medium" : "text-white/80"
+                          }`}>{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -163,6 +174,63 @@ export default function Plans() {
           <p className="text-muted-foreground">
             <span className="text-accent font-semibold">Todos os planos incluem:</span> Acesso ao Mentor IA, múltiplas tiragens, modo estudo e atualizações regulares
           </p>
+        </div>
+
+        {/* Payment Section */}
+        <div className="mt-20 max-w-2xl mx-auto">
+          <div className="p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10">
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">Como Funciona o Pagamento</h3>
+            
+            <div className="space-y-8">
+              {/* PIX Payment */}
+              <div className="space-y-3">
+                <h4 className="text-lg font-semibold text-white">1. Pague com PIX</h4>
+                <p className="text-muted-foreground mb-4">Copie a chave PIX abaixo e faça a transferência no seu banco:</p>
+                <div className="flex gap-2">
+                  <div className="flex-1 px-4 py-3 rounded-lg bg-white/5 border border-accent/20 text-sm text-white truncate font-mono">
+                    {pixKey}
+                  </div>
+                  <button
+                    onClick={handleCopyPix}
+                    className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                      copied
+                        ? "bg-green-600 hover:bg-green-600 text-white"
+                        : "bg-accent hover:bg-accent/90 text-accent-foreground"
+                    }`}
+                  >
+                    {copied ? (
+                      <Check className="w-4 h-4" />
+                    ) : (
+                      <Copy className="w-4 h-4" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* WhatsApp Confirmation */}
+              <div className="space-y-3">
+                <h4 className="text-lg font-semibold text-white">2. Confirme via WhatsApp</h4>
+                <p className="text-muted-foreground mb-4">Após fazer o PIX, envie uma mensagem para confirmar seu pagamento:</p>
+                <a
+                  href={`https://wa.me/${whatsappNumber}?text=Olá! Realizei o pagamento via PIX e gostaria de ativar minha conta no Lumina.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full px-6 py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold text-center transition flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Enviar Mensagem no WhatsApp
+                </a>
+                <p className="text-xs text-muted-foreground text-center">+55 (16) 99793-4558</p>
+              </div>
+
+              {/* Important Info */}
+              <div className="p-4 rounded-lg bg-accent/10 border border-accent/20">
+                <p className="text-sm text-foreground">
+                  <span className="font-semibold">📋 Importante:</span> Após confirmar o pagamento via WhatsApp, você receberá as instruções de acesso ao Lumina em até 24 horas.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
